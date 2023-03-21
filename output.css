@@ -1,0 +1,224 @@
+* {
+  font-family: "Hanken Sans", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  scroll-behavior: smooth;
+  font-size: 15px;
+}
+
+:root {
+  --grey: rgb(149, 142, 142) ;
+}
+
+.main-content {
+  margin: 0 auto;
+  display: flex;
+}
+.main-content .store-items {
+  display: flex;
+  gap: 4rem 3rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 3rem;
+}
+
+.store-item {
+  width: calc(24% - 3rem);
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  transition: 0.3s;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 20px;
+}
+.store-item:hover {
+  border: 1px solid var(--grey);
+}
+.store-item .available {
+  width: 100%;
+  padding-left: 40px;
+}
+.store-item .available * {
+  font-size: 14px;
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+.store-item .available .in-stock {
+  color: green;
+}
+.store-item .available .in-stock .material-icons-round {
+  font-size: 18px;
+}
+.store-item .available .out-of-stock {
+  color: var(--grey);
+}
+.store-item .available .out-of-stock .material-icons-round {
+  font-size: 18px;
+}
+.store-item .image-div {
+  height: 180px;
+}
+.store-item .image-div img {
+  height: 100%;
+  max-width: 100%;
+}
+.store-item .bottom {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.store-item .bottom .review-block {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.store-item .bottom .review-block .lhs .material-icons-round {
+  color: #cacdd8;
+  font-size: 22px;
+}
+.store-item .bottom .review-block .lhs .material-icons-round.rated {
+  color: #e9a427;
+}
+.store-item .bottom .review-block .rhs {
+  color: var(--grey);
+  font-size: 14px;
+}
+.store-item .bottom .name {
+  text-transform: uppercase;
+}
+.store-item .bottom .price-cart {
+  display: flex;
+  justify-content: space-between;
+}
+.store-item .bottom .price-cart .lhs .old {
+  text-decoration: line-through;
+  color: var(--grey);
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.store-item .bottom .price-cart .lhs .current {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+.store-item .bottom .price-cart .lhs .current .main {
+  font-weight: bold;
+  font-size: 16px;
+}
+.store-item .bottom .price-cart .lhs .current .save {
+  color: var(--grey);
+  font-size: 14px;
+}
+.store-item .bottom .price-cart .rhs {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.store-item .bottom .price-cart .rhs button {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 3px;
+  border: none;
+  color: var(--grey);
+}
+.store-item .bottom .price-cart .rhs button:hover:not(:disabled) {
+  background: rgb(134, 121, 121);
+  color: #fff;
+}
+.store-item .bottom .price-cart .rhs button:disabled {
+  cursor: not-allowed;
+}
+.store-item .bottom .price-cart .rhs.disabled {
+  opacity: 0.6;
+}
+
+.side-modal-container {
+  box-shadow: 0px 5px 9px 2px rgba(69, 104, 209, 0.06);
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  height: 100vh;
+  z-index: 51;
+}
+
+.side-modal-child {
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  z-index: 51;
+}
+
+.child-top {
+  min-height: 137px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
+  height: 100%;
+  padding: 0px 40px 40px;
+  background-color: #fff;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.body .inner {
+  width: 100%;
+  max-width: 768px;
+}
+
+.close {
+  margin: 3.7rem 2rem 0 0;
+  cursor: pointer;
+}
+
+.skeleton-log {
+  width: 100%;
+  height: 130px;
+  cursor: default !important;
+  background: linear-gradient(90deg, #eeeeee, #dadada, #ebebeb);
+  background-size: 200%;
+  animation: skeleton 1s ease-in-out infinite;
+  -webkit-animation: skeleton 1s ease-in-out infinite;
+  margin-bottom: 0.2rem;
+}
+
+.modal-top {
+  height: 130px;
+  width: 100%;
+  position: sticky;
+  position: -webkit-sticky;
+  background: rgb(255, 255, 255);
+  padding-top: 30px;
+  padding-bottom: 20px;
+  margin-bottom: 0px;
+  top: 0;
+  z-index: 20;
+}
+
+.modal-top .inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  height: 50px;
+}
+
+.modal-top .inner .lhs,
+.modal-top .inner .rhs {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 100%;
+}
+
+/*# sourceMappingURL=output.css.map */

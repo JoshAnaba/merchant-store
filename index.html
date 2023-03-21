@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Merchant Store</title>
+    <link rel="stylesheet" href="output.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app" class="main-content">
+      <div class="store-items">
+        <div v-for="item in store" :key="item.id" class="store-item">
+          <div class="available">
+            <div v-if="item.available > 0" class="in-stock">
+              <span class="material-icons-round">check_circle</span
+              ><span>In stock</span>
+            </div>
+            <div v-else class="out-of-stock">
+              <span class="material-icons-round">cancel</span
+              ><span>Out of stock</span>
+            </div>
+          </div>
+          <div class="image-div">
+            <img :src="`/img/${item.image}`" :alt="item.product.name" />
+          </div>
+          <div class="bottom">
+            <div class="review-block">
+              <div class="lhs">
+                <span
+                  v-for="index in 5"
+                  :key="index"
+                  :class="
+                ['material-icons-round', (index <= item.rating)
+                 ? 'rated'
+                 : ''
+                 ]"
+                  >star</span
+                >
+              </div>
+              <div class="rhs">Reviews({{item.reviews}})</div>
+            </div>
+            <div class="name">
+              {{item.product.name}} - {{item.product.type}} -
+              {{item.product.color}}
+            </div>
+            <div class="price-cart">
+              <div class="lhs">
+                <div class="old">
+                  {{item.currency === 'USD' ? '$' : '#'}} {{(item.price +
+                  item.price*0.10).toFixed(2)}}
+                </div>
+                <div class="current">
+                  <div class="main">
+                    {{item.currency === 'USD' ? '$' : '#'}}
+                    {{item.price.toFixed(2)}}
+                  </div>
+                  <div class="save">
+                    - save {{item.currency === 'USD' ? '$' : '#'}} {{
+                    (item.price*0.10).toFixed(2)}}
+                  </div>
+                </div>
+              </div>
+              <div :class="['rhs', item.available > 0 ? '' : 'disabled']">
+                <button
+                  @click="addToCart(item, '-')"
+                  :disabled="item.available <= 0"
+                >
+                  -
+                </button>
+                <span
+                  >cart({{cart.filter((i)=> i.item === item.id).length}})</span
+                >
+                <button
+                  @click="addToCart(item, '+')"
+                  :disabled="item.available <= 0"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="cart.length" class="side-modal-container" ref="modal-ctn">
+        <div class="side-modal-child">
+          <div ref="side-modal-child" class="body slide-in">
+            <div class="modal-top">
+              <div class="inner">
+                <div class="lhs">
+                  <button>Clear <span class="material-icons-round">cart</span></button>
+                </div>
+              </div>
+            </div>
+            <div class="inner">
+              Checkout {{cart}}
+              <!-- <slot name="content" /> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const { createApp } = Vue;
+      createApp({
+        data() {
+          return {
+            message: "Hello Vue!",
+            // cart: JSON.parse(localStorage.getItem("shopping-cart")),
+            store: [
+              {
+                id: 1,
+                price: 499,
+                currency: "USD",
+                image: "lenovo-laptop.jpeg",
+                rating: 4,
+                reviews: 20,
+                available: 20,
+                product: {
+                  name: "Lenovo",
+                  type: "laptop",
+                  color: "black",
+                },
+              },
+              {
+                id: 2,
+                price: 499,
+                currency: "USD",
+                image: "hp-laptop.jpeg",
+                rating: 3,
+                reviews: 12,
+                available: 13,
+                product: {
+                  name: "HP",
+                  type: "laptop",
+                  color: "black",
+                },
+              },
+              {
+                id: 3,
+                price: 499,
+                image: "lenovo-laptop.jpeg",
+                currency: "USD",
+                rating: 5,
+                reviews: 35,
+                available: 30,
+                product: {
+                  name: "Dell",
+                  type: "laptop",
+                  color: "blue",
+                },
+              },
+              {
+                id: 4,
+                price: 599,
+                image: "hp-laptop.jpeg",
+                currency: "USD",
+                rating: 4,
+                reviews: 20,
+                available: 20,
+                product: {
+                  name: "Lenovo",
+                  type: "laptop",
+                  color: "red",
+                },
+              },
+              {
+                id: 5,
+                price: 599,
+                image: "lenovo-laptop.jpeg",
+                currency: "USD",
+                rating: 3,
+                reviews: 12,
+                available: 0,
+                product: {
+                  name: "HP",
+                  type: "laptop",
+                  color: "black",
+                },
+              },
+              {
+                id: 6,
+                price: 49,
+                image: "oraimo-charger.webp",
+                currency: "USD",
+                rating: 5,
+                reviews: 24,
+                available: 0,
+                product: {
+                  name: "Oraimo",
+                  type: "charger",
+                  color: "black",
+                },
+              },
+              {
+                id: 7,
+                price: 49,
+                image: "new-age-charger.webp",
+                currency: "USD",
+                rating: 4,
+                reviews: 24,
+                available: 0,
+                product: {
+                  name: "New age",
+                  type: "charger",
+                  color: "black",
+                },
+              },
+              {
+                id: 8,
+                price: 99,
+                image: "new-age-charger.webp",
+                currency: "USD",
+                rating: 5,
+                reviews: 24,
+                available: 2,
+                product: {
+                  name: "Oraimo",
+                  type: "charger",
+                  color: "black",
+                },
+              },
+            ],
+          };
+        },
+        computed: {
+          cart () {
+            return JSON.parse(localStorage.getItem("shopping-cart")) || []
+          }
+        },
+        created() {},
+        methods: {
+          addToCart(item, sign) {
+            if (sign === "+") {
+              this.add(item);
+            } else {
+              this.remove(item);
+            }
+          },
+          add(item) {
+            const cartItemJSON = JSON.stringify(item);
+            let cartArray = new Array();
+            if (localStorage.getItem("shopping-cart")) {
+              cartArray = JSON.parse(localStorage.getItem("shopping-cart"));
+            }
+            cartArray.push(cartItemJSON);
+            const cartJSON = JSON.stringify(cartArray);
+            localStorage.setItem("shopping-cart", cartJSON);
+          },
+          remove(item) {
+            const cartItemJSON = JSON.stringify(item);
+            const cartArray = new Array();
+            if (localStorage.getItem("shopping-cart")) {
+              cartArray = JSON.parse(localStorage.getItem("shopping-cart"));
+            }
+            cartArray.push(cartItemJSON);
+            const cartJSON = JSON.stringify(cartArray);
+            localStorage.setItem("shopping-cart", cartJSON);
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
