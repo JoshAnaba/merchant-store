@@ -93,7 +93,7 @@
             <div class="modal-top">
               <div class="inner">
                 <div class="lhs">
-                  <button>Clear <span class="material-icons-round">cart</span></button>
+                  <button>Clear <span class="material-icons-round">shopping_cart</span></button>
                 </div>
               </div>
             </div>
@@ -234,7 +234,9 @@
             return JSON.parse(localStorage.getItem("shopping-cart")) || []
           }
         },
-        created() {},
+        created() {
+          console.log(process.env.secret_key)
+        },
         methods: {
           addToCart(item, sign) {
             if (sign === "+") {

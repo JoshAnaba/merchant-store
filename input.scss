@@ -7,7 +7,7 @@
 }
 
 :root {
-  --grey: rgb(149, 142, 142)
+  --grey: rgb(149, 142, 142);
 }
 
 .main-content {
@@ -75,20 +75,20 @@
       display: flex;
       align-items: center;
       gap: 5px;
-    .lhs {
-      .material-icons-round {
-        color: #cacdd8;
-        font-size: 22px;
-        &.rated {
-          color: #e9a427;
+      .lhs {
+        .material-icons-round {
+          color: #cacdd8;
+          font-size: 22px;
+          &.rated {
+            color: #e9a427;
+          }
         }
       }
-    }
 
-    .rhs {
-      color: var(--grey);
-      font-size: 14px;
-    }
+      .rhs {
+        color: var(--grey);
+        font-size: 14px;
+      }
     }
 
     .name {
@@ -115,7 +115,7 @@
             font-size: 16px;
           }
           .save {
-            color:var(--grey);
+            color: var(--grey);
             font-size: 14px;
           }
         }
@@ -147,7 +147,7 @@
   }
 }
 
-// side modal 
+// side modal
 
 .side-modal-container {
   box-shadow: 0px 5px 9px 2px rgb(69 104 209 / 6%);
