@@ -14,6 +14,7 @@
   </head>
   <body>
     <div id="app" class="main-content">
+      {{secret_key}}
       <div class="store-items">
         <div v-for="item in store" :key="item.id" class="store-item">
           <div class="available">
@@ -217,6 +218,7 @@
                 price: 99,
                 image: "new-age-charger.webp",
                 currency: "USD",
+                secret_key: '',
                 rating: 5,
                 reviews: 24,
                 available: 2,
@@ -236,6 +238,7 @@
         },
         created() {
           console.log(process.env.secret_key)
+          this.secret_key = process.env.secret_key
         },
         methods: {
           addToCart(item, sign) {
